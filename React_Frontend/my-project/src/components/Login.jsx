@@ -4,13 +4,13 @@ import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import shareVideo from "../assets/share.mp4"
-import logo from "../assets/logowhite.png"
+import whitelogo from "../assets/whitelogo.png"
 import{ client } from "../client"
 function Login() {
     const navigate =useNavigate();
   const responseGoogle=(detail,credentialResponse)=>{
     console.log(detail)
-    localStorage.setItem('user',detail)
+     localStorage.setItem('user', JSON.stringify(detail));
     const {name,sub,picture} = detail;
     const doc={
       _id:sub,
@@ -32,9 +32,9 @@ function Login() {
                 <video className='w-full h-full object-cover' src={shareVideo} type="video/mp4" loop controls={false} muted autoPlay></video>
                 <div className='absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg-blackOverlay'>
                     <div className='p-5'>
-                        <img width='130px' src={logo} alt="logo" />
+                        <img width='250px' src={whitelogo} alt="logo" />
                     </div>
-                    <div className='shadow-2xl '>
+                    <div className='shadow-2xl' >
                            <GoogleOAuthProvider  clientId="1004545684557-gsrgnmkah13necnubsg70spm29t1id5n.apps.googleusercontent.com">
                                <GoogleLogin 
                                    onSuccess={(credentialResponse) => {
