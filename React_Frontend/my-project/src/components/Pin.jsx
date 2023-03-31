@@ -16,6 +16,18 @@ function Pin({pin:{postedBy, image, _id, destination ,save}}) {
   const alreadySave=!!(save?.filter((item)=>item.postedBy?._id === user?.sub))?.length; 
 //1,[1,2,3] -> [1].length -> 1 -> !1 -> false -> !false -> true
 //4,[1,2,3] -> [].length -> 0 -> !0 -> true -> !true -> false
+const deletePin = (_id) => {
+
+    client
+      .delete(_id)
+      .then(() => {
+        window.location.reload();
+      });
+  };
+
+
+
+
 
 const savePin = (id)=>{
   if(!alreadySave){
@@ -41,11 +53,6 @@ const savePin = (id)=>{
 }
 
 
-const deletePin =(id)=>{
-  client
-  .delete(id)
-  .then(()=>window.location.reload())
-}
 
   return (
     <div className='m-2'>
@@ -70,10 +77,10 @@ const deletePin =(id)=>{
                     </a>
                 </div>
                 {alreadySave ?(
-                  <button type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none '>
+                  <button type='button' className='bg-sky-500/100 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none '>
                   {save?.length} Saved
                   </button>
-                ):<button type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none' onClick={(e)=>{
+                ):<button type='button' className='bg-sky-500/100 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none' onClick={(e)=>{
                   e.stopPropagation()
                   savePin(_id);
                 }}>
@@ -96,8 +103,8 @@ const deletePin =(id)=>{
                   )}
                   {postedBy?._id === user?.sub &&(
                     <button type='button' onClick={(e)=>{
-                  e.stopPropagation()
-                  deletePin(_id);
+                          e.stopPropagation()
+                           deletePin(_id);
                 }} className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none">
                      <AiTwotoneDelete />
                     </button> 

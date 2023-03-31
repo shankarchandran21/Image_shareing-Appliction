@@ -1,6 +1,6 @@
 import React from 'react'
 import Masonry from 'react-masonry-css'
-import Pins from '../container/Pins'
+// import Pins from '../container/Pins'
 import Pin from './Pin'
 const breakpointObj={
     default:4,
