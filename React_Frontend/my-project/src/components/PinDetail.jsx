@@ -58,6 +58,7 @@ useEffect(() => {
 
 
 
+
 if(!pinDetails){
   return<Spinner message={"Loading Pin....."}></Spinner>
 }
@@ -97,9 +98,9 @@ if(!pinDetails){
       </Link>
       <h2 className='mt-5 text-2xl'>Comments</h2> 
       <div className='max-h-370 overflow-y-auto'>
-          {pinDetails?.comments?.map((comment)=>{
+          {pinDetails?.comments?.map((comment,index)=>{
             return (
-              <div className='flex gap-2 mt-5 items-center'>
+              <div key={index} className='flex gap-2 mt-5 items-center'>
                   <img src={comment.postedBy.image} alt="user-profile"
                   className='w-10 h-10 rounded-full cursor-pointer'
                   />
@@ -131,11 +132,12 @@ if(!pinDetails){
       </div>
         </div>
     </div>
-    {pins ? (
+    {pins?.length > 0 ? (
       <>
       <h2 className='text-center font-bold text-2x mt-8 mb-4'>
-        <MasonryLayout pins={pins}/>
+        More like this
       </h2>
+        <MasonryLayout pins={pins}/>
       </>
     ):(
       <Spinner message="Loading more pins..."></Spinner>

@@ -98,7 +98,7 @@ const savePin = (id)=>{
                   rel="noreferrer"
                 >
                   <BsFillArrowUpRightCircleFill />
-                  {destination.length>20?destination.slice(8,18):destination.slice(8)}
+                  {destination.length>15?`${destination.slice(8,15)}...`:destination.slice(8)}
                 </a>
                   )}
                   {postedBy?._id === user?.sub &&(
