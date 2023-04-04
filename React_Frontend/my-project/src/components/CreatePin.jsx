@@ -38,7 +38,7 @@ const CreatePin = ({user}) => {
 
 
 const savePin =()=>{
-  if(title && destination && imageAsset?._id && category){
+  if(title  && imageAsset?._id && category && about){
     const doc ={
       _type:'pin',
       title,
@@ -147,7 +147,7 @@ const savePin =()=>{
             type="url"
             vlaue={destination}
             onChange={(e) => setDestination(e.target.value)}
-            placeholder="Add a destination link"
+            placeholder="Optional - Add a destination link"
             className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2"
           />
           <div className='flex flex-col'>

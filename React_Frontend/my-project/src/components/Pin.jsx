@@ -13,7 +13,8 @@ function Pin({pin:{postedBy, image, _id, destination ,save}}) {
   const [savingPost,setSavingPost] = useState(false)
   const navigate=useNavigate()
   const user=fetchUser()
-  const alreadySave=!!(save?.filter((item)=>item.postedBy?._id === user?.sub))?.length; 
+  const alreadySave=!!(save?.filter((item)=>item?.postedBy?._id === user?.sub))?.length; 
+  const desinationCheck = !!(destination?.match(/www./gi))?.length;
 //1,[1,2,3] -> [1].length -> 1 -> !1 -> false -> !false -> true
 //4,[1,2,3] -> [].length -> 0 -> !0 -> true -> !true -> false
 const deletePin = (_id) => {
@@ -89,8 +90,9 @@ const savePin = (id)=>{
 
                 }
               </div>
+              
               <div className='flex justify-between items-center gap-2 w-full'>
-                  {destination && (
+                  {desinationCheck ? (
                     <a
                   href={destination}
                   target="_blank"
@@ -98,9 +100,9 @@ const savePin = (id)=>{
                   rel="noreferrer"
                 >
                   <BsFillArrowUpRightCircleFill />
-                  {destination.length>15?`${destination.slice(8,15)}...`:destination.slice(8)}
+                  {destination?.length>15?`${destination.slice(8,15)}...`:destination.slice(8)}
                 </a>
-                  )}
+                  ):null}
                   {postedBy?._id === user?.sub &&(
                     <button type='button' onClick={(e)=>{
                           e.stopPropagation()
