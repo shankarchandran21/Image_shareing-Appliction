@@ -32,6 +32,7 @@ const fetchPinDetails = ()=>{
 }
 
 
+
 const addComment = ()=>{
    if (comment) {
       setAddingComment(true);
@@ -53,7 +54,7 @@ const addComment = ()=>{
 
 useEffect(() => {
   fetchPinDetails()
-}, [pinId])
+}, [pinId,pinDetails])
 
 
 

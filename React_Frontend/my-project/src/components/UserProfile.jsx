@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { useParams,useNavigate } from 'react-router-dom'
 import { googleLogout } from '@react-oauth/google';
-import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
+import { fetchUser, userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 import {client} from '../client'
 import MasonryLayout from './MasonryLayout'
 import Spinner from './Spinner'
@@ -14,16 +14,17 @@ function UserProfile() {
   const [activeBtn,setActiveBtn] = useState('created');
   const navigated = useNavigate();
   const {userId} = useParams();
+  const userInfo = fetchUser()
   const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,technology'
-
+  
   const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
-const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
-
-const logOut = ()=>{
-  localStorage.clear()
-  navigated('/login');
-}
-
+  const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
+  
+  const logOut = ()=>{
+    localStorage.clear()
+    navigated('/login');
+  }
+  
   useEffect(() => {
  const query = userQuery(userId)
 
@@ -64,11 +65,11 @@ useEffect(()=>{
               alt="user-pic"
             />
             <h1 className='font-bold text-3xl text-center mt-3'>{user?.userName}</h1>
-              <div className='absolute top-0 z-1 right-0 p-2 bg-white rounded-full hover:bg-slate-200'>
-                  {userId === user?._id &&(
+             {userId === userInfo?.sub &&(
+                <div className='absolute top-0 z-1 right-0 p-2 bg-white rounded-full hover:bg-slate-200'>
                     <AiOutlineLogout color='87CEEB' fontSize={21} onClick={logOut}/>
+                </div>
                   )}
-              </div>
             </div>
             <div className='text-center mb-7 '>
               <button type='button' 

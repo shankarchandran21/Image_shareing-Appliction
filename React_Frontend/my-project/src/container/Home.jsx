@@ -23,7 +23,7 @@ function Home() {
         setUser(data[0])
       })
     }, [])
- 
+    console.log(userInfo)
   
   useEffect(() => {
    scrollRef.current.scrollTo(0,0)
